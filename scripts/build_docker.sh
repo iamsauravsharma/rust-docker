@@ -54,12 +54,10 @@ do
 done
 
 # print out build docker images and containers along with other information
-docker images --all --no-trunc
-docker ps --all --no-trunc
-docker info
+docker images
 
 # get repository name along with its tag
-REPOSITORY_WITH_TAG=(docker images --format "{{.Repository}}:{{.Tag}}")
+REPOSITORY_WITH_TAG=$(docker images --format "{{.Repository}}:{{.Tag}}")
 
 for repository in $REPOSITORY_WITH_TAG
 do
