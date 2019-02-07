@@ -14,4 +14,4 @@ before_deploy:
 deploy:
   - provider: script
     script: bash scripts/build_docker.sh
-skip-cleanup: true
+    skip-cleanup: true
