@@ -1,7 +1,7 @@
 language: minimal
 
 git:
-depth: false
+  depth: false
 
 dist: xenial
 
@@ -15,3 +15,8 @@ deploy:
   - provider: script
     script: bash scripts/build_docker.sh
     skip-cleanup: true
+  - provider: script
+    script: bash scripts/publish_docker.sh
+    skip-cleanup: true
+    on:
+      branch: master

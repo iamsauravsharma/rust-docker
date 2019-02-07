@@ -3,6 +3,8 @@ ARG IMAGE=ubuntu:${VERSION}
 
 FROM ${IMAGE}
 
+LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
+
 RUN apt update \
     && apt install -y \
     curl \

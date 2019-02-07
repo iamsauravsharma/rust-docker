@@ -6,6 +6,8 @@ FROM ${IMAGE}
 
 ARG RUST_VERSION=stable
 
+LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
+
 RUN . ~/.cargo/env \
     && rustup install ${RUST_VERSION} \
     && rustup default ${RUST_VERSION}

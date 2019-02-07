@@ -5,6 +5,8 @@ ARG IMAGE=iamsauravsharma/rust:${RUST_VERSION}-${OS}${OS_VERSION}
 
 FROM ${IMAGE}
 
+LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
+
 RUN . ~/.cargo/env \
     && rustup component add rustfmt
 
