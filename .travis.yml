@@ -1,0 +1,17 @@
+language: minimal
+
+git:
+depth: false
+
+dist: xenial
+
+services:
+  - docker
+
+before_deploy:
+  - chmod +x scripts/build_docker.sh
+
+deploy:
+  - provider: script
+    script: bash scripts/build_docker.sh
+skip-cleanup: true

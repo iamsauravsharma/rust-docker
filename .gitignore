@@ -1,0 +1,7 @@
+#IDE file
+.vscode
+.idea
+*.iml
+
+#UNIX file
+.directory
