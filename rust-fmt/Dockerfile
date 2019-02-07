@@ -6,7 +6,7 @@ ARG IMAGE=iamsauravsharma/rust:${RUST_VERSION}-${OS}${OS_VERSION}
 FROM ${IMAGE}
 
 RUN . ~/.cargo/env \
-    && rustup compenent add rustfmt
+    && rustup component add rustfmt
 
 ENTRYPOINT uname -a \
     && . ~/.cargo/env \

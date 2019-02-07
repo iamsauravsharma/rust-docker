@@ -3,7 +3,7 @@ ARG IMAGE=ubuntu:${VERSION}
 
 FROM ${IMAGE}
 
-RUN apt-get update \
+RUN apt update \
     && apt install -y \
     curl \
     sudo \

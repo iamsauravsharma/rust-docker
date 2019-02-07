@@ -6,7 +6,7 @@ ARG IMAGE=iamsauravsharma/rust:${RUST_VERSION}-${OS}${OS_VERSION}
 FROM ${IMAGE}
 
 RUN . ~/.cargo/env \
-    &&rustup compenent add clippy
+    &&rustup component add clippy
 
 ENTRYPOINT uname -a \
     && . ~/.cargo/env \
