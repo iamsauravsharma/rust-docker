@@ -7,6 +7,6 @@ LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
 ADD ./scripts /root/ubuntu-scripts
 
-RUN . /root/ubutnu-scripts/update_package.sh
+RUN . /root/ubuntu-scripts/add_package.sh
 
 ENTRYPOINT . /root/ubuntu-scripts/show_version.sh

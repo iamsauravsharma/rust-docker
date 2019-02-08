@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-~/.cargo/env \
+. ~/.cargo/env \
 &&rustup component add clippy

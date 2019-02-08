@@ -9,9 +9,7 @@ services:
   - docker
 
 before_deploy:
-  - chmod +x scripts/build_docker.sh
-  - chmod +x scripts/publish_docker.sh
-  - chmod +x scripts/clean_docker.sh
+  - chmod -R 777 scripts
 
 deploy:
   - provider: script
