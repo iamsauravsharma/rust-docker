@@ -10,6 +10,8 @@ services:
 
 before_deploy:
   - chmod +x scripts/build_docker.sh
+  - chmod +x scripts/publish_docker.sh
+  - chmod +x scripts/clean_docker.sh
 
 deploy:
   - provider: script
@@ -20,3 +22,6 @@ deploy:
     skip-cleanup: true
     on:
       branch: master
+  - provider: script
+    script: bash scripts/clean_docker.sh
+    skip-cleanup: true
