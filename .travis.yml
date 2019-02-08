@@ -15,6 +15,9 @@ before_deploy:
 
 deploy:
   - provider: script
+    script: bash scripts/copy_file.sh
+    skip-cleanup: true
+  - provider: script
     script: bash scripts/build_docker.sh
     skip-cleanup: true
   - provider: script
@@ -24,4 +27,7 @@ deploy:
       branch: master
   - provider: script
     script: bash scripts/clean_docker.sh
+    skip-cleanup: true
+  - provider: script
+    script: bash scripts/remove_copied_file.sh
     skip-cleanup: true

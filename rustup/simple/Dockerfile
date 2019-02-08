@@ -6,7 +6,7 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ../scripts /root/rustup-scripts
+ADD ./scripts /root/rustup-scripts
 
 RUN . /root/rustup-scripts/download.sh
 

@@ -7,7 +7,7 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ../scripts /root/rust-fmt-clippy-scripts
+ADD ./scripts /root/rust-fmt-clippy-scripts
 
 RUN . /root/rust-fmt-clippy-scripts/download.sh
 

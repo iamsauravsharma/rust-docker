@@ -7,7 +7,7 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ../scripts /root/rust-fmt-scripts
+ADD ./scripts /root/rust-fmt-scripts
 
 RUN . /root/rust-fmt-scripts/download.sh
 

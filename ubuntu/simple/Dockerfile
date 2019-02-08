@@ -5,7 +5,7 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ../scripts /root/ubuntu-scripts
+ADD ./scripts /root/ubuntu-scripts
 
 RUN . /root/ubutnu-scripts/update_package.sh
 
