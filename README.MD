@@ -8,7 +8,7 @@ Docker image with different version of rust along with clippy and rustfmt preins
 
 | Images          | Versions              |
 |:---------------:|:---------------------:|
-| OS              |[List of OS](#####OS)  |
+| OS              |[List of OS](#OS)      | 
 | rustup          | default               | 
 | rust            | stable, beta, nightly |
 | rust-clippy     | stable, beta, nightly |
