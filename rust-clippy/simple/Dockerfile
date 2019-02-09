@@ -7,8 +7,10 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/rust-clippy-scripts
+ADD ./scripts /root/scripts/rust-clippy-scripts
 
-RUN . /root/rust-clippy-scripts/download.sh
+RUN chmod 777 -R /root/scripts
 
-ENTRYPOINT . /root/rust-clippy-scripts/show_version.sh
+RUN /root/scripts/rust-clippy-scripts/download.sh
+
+ENTRYPOINT /root/scripts//rust-clippy-scripts/show_version.sh

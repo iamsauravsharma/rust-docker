@@ -5,8 +5,10 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/ubuntu-scripts
+ADD ./scripts /root/scripts/ubuntu-scripts
 
-RUN . /root/ubuntu-scripts/add_package.sh
+RUN chmod 777 -R /root/scripts
 
-ENTRYPOINT . /root/ubuntu-scripts/show_version.sh
+RUN /root/scripts/ubuntu-scripts/add_package.sh
+
+ENTRYPOINT /root/scripts//ubuntu-scripts/show_version.sh

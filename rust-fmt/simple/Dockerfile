@@ -7,8 +7,10 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/rust-fmt-scripts
+ADD ./scripts /root/scripts/rust-fmt-scripts
 
-RUN . /root/rust-fmt-scripts/download.sh
+RUN chmod 777 -R /root/scripts
 
-ENTRYPOINT . /root/rust-fmt-scripts/show_version.sh 
+RUN /root/scripts/rust-fmt-scripts/download.sh
+
+ENTRYPOINT /root/scripts//rust-fmt-scripts/show_version.sh

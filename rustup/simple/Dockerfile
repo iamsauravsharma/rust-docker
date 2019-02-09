@@ -6,8 +6,10 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/rustup-scripts
+ADD ./scripts /root/scripts/rustup-scripts
 
-RUN . /root/rustup-scripts/download.sh
+RUN chmod 777 -R /root/scripts
 
-ENTRYPOINT . /root/rustup-scripts/show_version.sh
+RUN /root/scripts/rustup-scripts/download.sh
+
+ENTRYPOINT /root/scripts//rustup-scripts/show_version.sh

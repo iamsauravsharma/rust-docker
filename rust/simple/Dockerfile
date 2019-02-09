@@ -8,8 +8,10 @@ ARG RUST_VERSION=stable
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/rust-scripts
+ADD ./scripts /root/scripts/rust-scripts
 
-RUN . /root/rust-scripts/download.sh ${RUST_VERSION}
+RUN chmod 777 -R /root/scripts
 
-ENTRYPOINT . /root/rust-scripts/show_version.sh
+RUN /root/scripts/rust-scripts/download.sh ${RUST_VERSION}
+
+ENTRYPOINT /root/scripts//rust-scripts/show_version.sh
