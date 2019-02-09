@@ -2,6 +2,6 @@
 
 RUST_VERSION=$1
 
-. ~/.cargo/env \
-&& rustup install ${RUST_VERSION} \
-&& rustup default ${RUST_VERSION}
+. ~/.cargo/env
+rustup install ${RUST_VERSION}
+rustup default ${RUST_VERSION}

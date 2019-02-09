@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
-uname -a \
-&& . ~/.cargo/env \
-&& rustup --version \
-&& rustc --version \
-&& cargo --version \
-&& rustfmt --version \
-&& /bin/bash
+uname -a
+. ~/.cargo/env
+rustup --version
+rustc --version
+cargo --version
+if [[ "$RUSTFMT_STATUS_CODE" == "0" ]]
+then
+    rustfmt --version
+else
+    echo "rustfmt unavailable to download so rustfmt is not installed"
+fi
+/bin/bash

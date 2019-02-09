@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-uname -a \
-&& /bin/bash
+uname -a
+/bin/bash
