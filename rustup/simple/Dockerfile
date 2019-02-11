@@ -12,4 +12,4 @@ RUN chmod 777 -R /root/scripts
 
 RUN /root/scripts/rustup-scripts/download.sh
 
-ENTRYPOINT /root/scripts//rustup-scripts/show_version.sh
+ENTRYPOINT /root/scripts/rustup-scripts/show_version.sh

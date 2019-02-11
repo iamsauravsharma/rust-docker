@@ -14,4 +14,4 @@ RUN chmod 777 -R /root/scripts
 
 RUN /root/scripts/rust-scripts/download.sh ${RUST_VERSION}
 
-ENTRYPOINT /root/scripts//rust-scripts/show_version.sh
+ENTRYPOINT /root/scripts/rust-scripts/show_version.sh

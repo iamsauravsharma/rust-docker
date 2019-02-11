@@ -11,4 +11,4 @@ RUN chmod 777 -R /root/scripts
 
 RUN /root/scripts/ubuntu-scripts/add_package.sh
 
-ENTRYPOINT /root/scripts//ubuntu-scripts/show_version.sh
+ENTRYPOINT /root/scripts/ubuntu-scripts/show_version.sh
