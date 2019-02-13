@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Different type of OS supported
 OS="UBUNTU"
 
