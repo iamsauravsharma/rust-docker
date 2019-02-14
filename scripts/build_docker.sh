@@ -20,12 +20,12 @@ do
         # build different os version images for os
         docker build --build-arg VERSION=$os_version \
         -t iamsauravsharma/$os_name:$os_version \
-        ./$os_name/simple
+        ./$os_name
 
         # build rustup for that os version
         docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version \
         -t iamsauravsharma/rustup:$os_name-$os_version \
-        ./rustup/simple
+        ./rustup
 
         # build different version of rust with components for certain os version
         for rust_version in $RUST
@@ -34,22 +34,22 @@ do
             # build only rust toolchain version installed docker
             docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
             -t iamsauravsharma/rust:$rust_version-$os_name$os_version \
-            ./rust/simple
+            ./rust
 
             # build docker with clippy installed along with rust
             docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
             -t iamsauravsharma/rust-clippy:$rust_version-$os_name$os_version \
-            ./rust-clippy/simple
+            ./rust-clippy
 
             # build docker with rustfmt installed along with rust
             docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
             -t iamsauravsharma/rust-fmt:$rust_version-$os_name$os_version \
-            ./rust-fmt/simple
+            ./rust-fmt
 
             # build docker with both clippy and rustfmt installed along with rust
             docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
             -t iamsauravsharma/rust-fmt-clippy:$rust_version-$os_name$os_version \
-            ./rust-fmt-clippy/simple
+            ./rust-fmt-clippy
         done
     done
 done
