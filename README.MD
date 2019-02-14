@@ -21,13 +21,14 @@ Docker image with different version of rust along with clippy and rustfmt preins
 |:-------:|
 | latest  |
 | rolling |
+| devel   |
 
 
 ### Tags formats
 
 | Images | Tags Format| Example |
 |:------:|:----------:|:-------:|
-| ```${os_type}``` | ```{os_version}``` | ```iamsauravsharma/ubuntu:latest```         |
+| ```${os_type}``` | ```{os_version}``` | ```iamsauravsharma/ubuntu:devel```         |
 | rustup | ```${os_type}-${version}```  | ```iamsauravsharam/rustup:ubuntu-rolling``` |
 | rust   | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust:stable-ubuntulatest``` |
 | rust-clippy       | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust-clippy:stable-ubuntulatest```    |

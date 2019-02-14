@@ -4,7 +4,7 @@
 OS="UBUNTU"
 
 # Version of different OS support
-UBUNTU="latest rolling"
+UBUNTU="latest rolling devel"
 
 # RUST version
 RUST="stable beta nightly"
