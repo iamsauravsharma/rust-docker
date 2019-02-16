@@ -54,9 +54,9 @@ do
 
         if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]
         then
-            bash ./publish_docker.sh
+            bash scripts/publish_docker.sh
         fi
-        bash ./clean_docker.sh
+        bash scripts/clean_docker.sh
 
     done
 done
