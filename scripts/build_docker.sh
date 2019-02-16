@@ -51,5 +51,12 @@ do
             -t iamsauravsharma/rust-fmt-clippy:$rust_version-$os_name$os_version \
             ./rust-fmt-clippy
         done
+
+        if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]
+        then
+            bash ./publish_docker.sh
+        fi
+        bash ./clean_docker.sh
+
     done
 done

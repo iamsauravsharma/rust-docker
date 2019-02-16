@@ -15,11 +15,3 @@ deploy:
   - provider: script
     script: bash scripts/build_docker.sh
     skip-cleanup: true
-  - provider: script
-    script: bash scripts/publish_docker.sh
-    skip-cleanup: true
-    on:
-      branch: master
-  - provider: script
-    script: bash scripts/clean_docker.sh
-    skip-cleanup: true
