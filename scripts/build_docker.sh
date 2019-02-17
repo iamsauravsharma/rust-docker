@@ -52,11 +52,17 @@ do
             ./rust-fmt-clippy
         done
 
-        if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]
+        if [[ $TRAVIS == "true" ]]
         then
+            if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]
+            then
+                bash scripts/publish_docker.sh
+            fi
+            bash scripts/clean_docker.sh
+        else
             bash scripts/publish_docker.sh
+            bash scripts/clean_docker.sh
         fi
-        bash scripts/clean_docker.sh
 
     done
 done
