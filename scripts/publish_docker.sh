@@ -9,6 +9,7 @@ fi
 # get repository name along with its tag which contain iamsaurav
 REPOSITORY_WITH_TAG=$(docker images --filter=reference="iamsauravsharma/*:*" --format "{{.Repository}}:{{.Tag}}")
 
+#push tag to dockerhub registry
 for repository in $REPOSITORY_WITH_TAG
 do
  docker push $repository

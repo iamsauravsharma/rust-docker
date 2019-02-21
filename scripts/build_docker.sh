@@ -30,7 +30,6 @@ do
         # build different version of rust with components for certain os version
         for rust_version in $RUST
         do
-
             # build only rust toolchain version installed docker
             docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
             -t iamsauravsharma/rust:$rust_version-$os_name$os_version \
@@ -52,6 +51,7 @@ do
             ./rust-fmt-clippy
         done
 
+        # check if docker script is runnning in travis then check branch and run otherwise locally run without checking branch
         if [[ $TRAVIS == "true" ]]
         then
             if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]
