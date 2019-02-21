@@ -5,6 +5,7 @@ uname -a
 rustup --version
 rustc --version
 cargo --version
+. ~/.statuscode
 if [[ "$CLIPPY_STATUS_CODE" == "0" ]]
 then
     cargo clippy --version
@@ -17,5 +18,4 @@ then
 else
     echo "rustfmt unavailable to download so rustfmt is not installed"
 fi
-rustfmt --version
 /bin/bash

@@ -5,6 +5,7 @@ uname -a
 rustup --version
 rustc --version
 cargo --version
+. ~/.statuscode
 if [[ "$RUSTFMT_STATUS_CODE" == "0" ]]
 then
     rustfmt --version

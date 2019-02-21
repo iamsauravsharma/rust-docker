@@ -2,6 +2,6 @@
 
 . ~/.cargo/env
 rustup component add clippy
-CLIPPY_STATUS_CODE=$? >> ~/.bashrc
+echo "CLIPPY_STATUS_CODE=$?" >> ~/.statuscode
 rustup component add rustfmt
-RUSTFMT_STATUS_CODE=$? >> ~/.bashrc
+echo "RUSTFMT_STATUS_CODE=$?" >> ~/.statuscode
