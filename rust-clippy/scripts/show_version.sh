@@ -5,7 +5,7 @@ rustup --version
 rustc --version
 cargo --version
 source ~/.statuscode
-if [[ "$CLIPPY_STATUS_CODE" == "0" ]]
+if [[ "$CLIPPY" == "yes" ]]
 then
     cargo clippy --version
 else

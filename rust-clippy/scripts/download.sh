@@ -2,4 +2,9 @@
 
 rustup component add clippy
 STATUS_CODE=$?
-echo "export CLIPPY_STATUS_CODE=\"$STATUS_CODE\"" >> ~/.statuscode
+if [[ "$STATUS_CODE" = "0" ]]
+then
+    echo "export CLIPPY=\"yes\"" >> ~/.statuscode
+else
+    echo "export CLIPPY=\"no\"" >> ~/.statuscode
+fi

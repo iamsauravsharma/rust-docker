@@ -5,13 +5,13 @@ rustup --version
 rustc --version
 cargo --version
 source ~/.statuscode
-if [[ "$CLIPPY_STATUS_CODE" == "0" ]]
+if [[ "$CLIPPY" == "yes" ]]
 then
     cargo clippy --version
 else
     echo "clippy unavailable to download so clippy is not installed"
 fi
-if [[ "$RUSTFMT_STATUS_CODE" == "0" ]]
+if [[ "$RUSTFMT" == "yes" ]]
 then
     rustfmt --version
 else

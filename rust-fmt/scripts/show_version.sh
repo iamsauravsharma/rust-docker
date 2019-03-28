@@ -5,7 +5,7 @@ rustup --version
 rustc --version
 cargo --version
 source ~/.statuscode
-if [[ "$RUSTFMT_STATUS_CODE" == "0" ]]
+if [[ "$RUSTFMT" == "yes" ]]
 then
     rustfmt --version
 else

@@ -2,7 +2,17 @@
 
 rustup component add clippy
 STATUS_CODE=$?
-echo "export CLIPPY_STATUS_CODE=\"$STATUS_CODE\"" >> ~/.statuscode
+if [[ "$STATUS_CODE" = "0" ]]
+then
+    echo "export CLIPPY=\"yes\"" >> ~/.statuscode
+else
+    echo "export CLIPPY=\"no\"" >> ~/.statuscode
+fi
 rustup component add rustfmt
 STATUS_CODE=$?
-echo "export RUSTFMT_STATUS_CODE=\"$STATUS_CODE\"" >> ~/.statuscode
+if [[ "$STATUS_CODE" = "0" ]]
+then
+    echo "export RUSTFMT=\"yes\"" >> ~/.statuscode
+else
+    echo "export RUSTFMT=\"no\"" >> ~/.statuscode
+fi
