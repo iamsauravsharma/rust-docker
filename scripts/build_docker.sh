@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-#Build date and time
-BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-
-#Git URL
-VCS_URL="https://github.com/iamsauravsharma/rust-docker"
-
-#Git sha
-VCS_REF=$(git log --pretty=format:'%h' -n 1)
-
 # Different type of OS supported
 OS="UBUNTU"
 
@@ -26,20 +17,14 @@ do
         # lowercase os name so docker images can be built
         os_name="${os,,}"
 
-        LINUX_VERSION=$os_name
-
         # build different os version images for os
-        docker build --build-arg VERSION=$os_version --build-arg BUILD_DATE=$BUILD_DATE \
-        --build-arg VCS_URL=$VCS_URL --build-arg VCS_REF=$VCS_REF --build-arg VERSION=$LINUX_VERSION \
-        -t iamsauravsharma/$os_name:$LINUX_VERSION \
+        docker build --build-arg VERSION=$os_version \
+        -t iamsauravsharma/$os_name:$os_version \
         ./$os_name
 
-        RUSTUP_VERSION=$os_name-$os_version
-
         # build rustup for that os version
-        docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg BUILD_DATE=$BUILD_DATE \
-        --build-arg VCS_URL=$VCS_URL --build-arg VCS_REF=$VCS_REF --build-arg VERSION=$RUSTUP_VERSION \
-        -t iamsauravsharma/rustup:$RUSTUP_VERSION \
+        docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version \
+        -t iamsauravsharma/rustup:$os_name-$os_version \
         ./rustup
 
         # build different version of rust with components for certain os version
@@ -48,30 +33,22 @@ do
             RUST_VERSION=$rust_version-$os_name$os_version
 
             # build only rust toolchain version installed docker
-            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version \
-            --build-arg RUST_VERSION=$rust_version --build-arg BUILD_DATE=$BUILD_DATE \
-            --build-arg VCS_URL=$VCS_URL --build-arg VCS_REF=$VCS_REF --build-arg VERSION=$RUST_VERSION \
+            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
             -t iamsauravsharma/rust:$RUST_VERSION \
             ./rust
 
             # build docker with clippy installed along with rust
-            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version \
-            --build-arg RUST_VERSION=$rust_version --build-arg BUILD_DATE=$BUILD_DATE \
-            --build-arg VCS_URL=$VCS_URL --build-arg VCS_REF=$VCS_REF --build-arg VERSION=$RUST_VERSION \
+            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
             -t iamsauravsharma/rust-clippy:$RUST_VERSION \
             ./rust-clippy
 
             # build docker with rustfmt installed along with rust
-            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version \
-            --build-arg RUST_VERSION=$rust_version --build-arg BUILD_DATE=$BUILD_DATE \
-            --build-arg VCS_URL=$VCS_URL --build-arg VCS_REF=$VCS_REF --build-arg VERSION=$RUST_VERSION \
+            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
             -t iamsauravsharma/rust-fmt:$RUST_VERSION \
             ./rust-fmt
 
             # build docker with both clippy and rustfmt installed along with rust
-            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version \
-            --build-arg RUST_VERSION=$rust_version --build-arg BUILD_DATE=$BUILD_DATE \
-            --build-arg VCS_URL=$VCS_URL --build-arg VCS_REF=$VCS_REF --build-arg VERSION=$RUST_VERSION \
+            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
             -t iamsauravsharma/rust-fmt-clippy:$RUST_VERSION \
             ./rust-fmt-clippy
         done
@@ -88,5 +65,6 @@ do
             bash scripts/publish_docker.sh
             bash scripts/clean_docker.sh
         fi
+
     done
 done
