@@ -2,7 +2,7 @@
 
 apt update
 apt dist-upgrade -y
-apt install -y curl sudo git --no-install-recommends
+apt install -y curl sudo git ca-certificates --no-install-recommends
 apt autoremove -y
 apt clean -y
 rm -rf /var/lib/apt/lists/*
