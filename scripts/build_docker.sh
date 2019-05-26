@@ -27,6 +27,15 @@ do
         -t iamsauravsharma/rustup:$os_name-$os_version \
         ./rustup
 
+        if [[ $os_name = "ubuntu" ]] && [[ $os_version == "latest" ]]
+        then
+            docker build -t iamsauravsharma/rustup:latest ./rustup
+            docker build -t iamsauravsharma/rust:latest ./rust
+            docker build -t iamsauravsharma/rust-clippy:latest ./rust-clippy
+            docker build -t iamsauravsharma/rust-fmt:latest ./rust-fmt
+            docker build -t iamsauravsharma/rust-fmt-clippy:latest ./rust-fmt-clippy
+        fi
+
         # build different version of rust with components for certain os version
         for rust_version in $RUST
         do
