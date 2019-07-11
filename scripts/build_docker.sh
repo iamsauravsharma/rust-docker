@@ -13,6 +13,25 @@ CLIPPY_DATE=$(curl https://rust-lang.github.io/rustup-components-history/x86_64-
 RUSTFMT_DATE=$(curl https://rust-lang.github.io/rustup-components-history/x86_64-unknown-linux-gnu/rustfmt)
 TODAY_DATE=$(date +%Y-%m-%d)
 
+
+build_clippy_image() {
+    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
+    -t iamsauravsharma/rust-clippy:$RUST_VERSION \
+    ./rust-clippy
+}
+
+build_fmt_image() {
+    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
+    -t iamsauravsharma/rust-fmt:$RUST_VERSION \
+    ./rust-fmt
+}
+
+build_fmt_clippy_image() {
+    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
+    -t iamsauravsharma/rust-fmt-clippy:$RUST_VERSION \
+    ./rust-fmt-clippy
+}
+
 for os in $OS
 do
     version=${!os}
@@ -90,21 +109,3 @@ do
 
     done
 done
-
-build_clippy_image() {
-    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
-    -t iamsauravsharma/rust-clippy:$RUST_VERSION \
-    ./rust-clippy
-}
-
-build_fmt_image() {
-    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
-    -t iamsauravsharma/rust-fmt:$RUST_VERSION \
-    ./rust-fmt
-}
-
-build_fmt_clippy_image() {
-    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
-    -t iamsauravsharma/rust-fmt-clippy:$RUST_VERSION \
-    ./rust-fmt-clippy
-}
