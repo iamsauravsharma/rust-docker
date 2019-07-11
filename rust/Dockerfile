@@ -1,6 +1,6 @@
 ARG OS=ubuntu
 ARG OS_VERSION=latest
-ARG IMAGE=iamsauravsharma/rustup:${OS}-${OS_VERSION}
+ARG IMAGE=rustup:${OS}-${OS_VERSION}
 
 FROM ${IMAGE}
 

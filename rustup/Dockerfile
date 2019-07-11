@@ -1,6 +1,6 @@
 ARG OS=ubuntu
 ARG OS_VERSION=latest
-ARG IMAGE=iamsauravsharma/${OS}:${OS_VERSION}
+ARG IMAGE=${OS}:${OS_VERSION}
 
 FROM ${IMAGE}
 
