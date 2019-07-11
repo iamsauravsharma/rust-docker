@@ -86,12 +86,15 @@ do
         done
 
         # tag a images a latest for easy fetching
-        docker tag iamsauravsharma/rustup:ubuntu-latest iamsauravsharma/rustup:latest
-        docker tag iamsauravsharma/rust:stable-ubuntulatest iamsauravsharma/rust:latest
-        docker tag iamsauravsharma/rust-clippy:stable-ubuntulatest iamsauravsharma/rust-clippy:latest
-        docker tag iamsauravsharma/rust-fmt:stable-ubuntulatest iamsauravsharma/rust-fmt:latest
-        docker tag iamsauravsharma/rust-fmt-clippy:stable-ubuntulatest iamsauravsharma/rust-fmt-clippy:latest
-
+        if [[ $os_name == "ubuntu" ]] && [[ $os_version == "latest" ]]
+        then
+            docker tag iamsauravsharma/rustup:ubuntu-latest iamsauravsharma/rustup:latest
+            docker tag iamsauravsharma/rust:stable-ubuntulatest iamsauravsharma/rust:latest
+            docker tag iamsauravsharma/rust-clippy:stable-ubuntulatest iamsauravsharma/rust-clippy:latest
+            docker tag iamsauravsharma/rust-fmt:stable-ubuntulatest iamsauravsharma/rust-fmt:latest
+            docker tag iamsauravsharma/rust-fmt-clippy:stable-ubuntulatest iamsauravsharma/rust-fmt-clippy:latest
+        fi
+        
         # check if docker script is runnning in travis then check branch and run otherwise locally run without checking branch
         if [[ $TRAVIS == "true" ]]
         then
