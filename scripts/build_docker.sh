@@ -50,15 +50,6 @@ do
         -t iamsauravsharma/rustup:$os_name-$os_version \
         ./rustup
 
-        if [[ $os_name = "ubuntu" ]] && [[ $os_version == "latest" ]]
-        then
-            docker build -t iamsauravsharma/rustup:latest ./rustup
-            docker build -t iamsauravsharma/rust:latest ./rust
-            docker build -t iamsauravsharma/rust-clippy:latest ./rust-clippy
-            docker build -t iamsauravsharma/rust-fmt:latest ./rust-fmt
-            docker build -t iamsauravsharma/rust-fmt-clippy:latest ./rust-fmt-clippy
-        fi
-
         # build different version of rust with components for certain os version
         for rust_version in $RUST
         do
@@ -93,6 +84,13 @@ do
                 build_fmt_clippy_image
             fi
         done
+
+        # tag a images a latest for easy fetching
+        docker tag iamsauravsharma/rustup:ubuntu-latest iamsauravsharma/rustup:latest
+        docker tag iamsauravsharma/rust:stable-ubuntulatest iamsauravsharma/rust:latest
+        docker tag iamsauravsharma/rust-clippy:stable-ubuntulatest iamsauravsharma/rust-clippy:latest
+        docker tag iamsauravsharma/rust-fmt:stable-ubuntulatest iamsauravsharma/rust-fmt:latest
+        docker tag iamsauravsharma/rust-fmt-clippy:stable-ubuntulatest iamsauravsharma/rust-fmt-clippy:latest
 
         # check if docker script is runnning in travis then check branch and run otherwise locally run without checking branch
         if [[ $TRAVIS == "true" ]]
