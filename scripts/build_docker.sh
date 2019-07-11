@@ -9,6 +9,10 @@ UBUNTU="latest rolling devel"
 # RUST version
 RUST="stable beta nightly"
 
+CLIPPY_DATE=$(curl https://rust-lang.github.io/rustup-components-history/x86_64-unknown-linux-gnu/clippy)
+RUSTFMT_DATE=$(curl https://rust-lang.github.io/rustup-components-history/x86_64-unknown-linux-gnu/rustfmt)
+TODAY_DATE=$(date +%Y-%m-%d)
+
 for os in $OS
 do
     version=${!os}
@@ -47,19 +51,31 @@ do
             ./rust
 
             # build docker with clippy installed along with rust
-            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
-            -t iamsauravsharma/rust-clippy:$RUST_VERSION \
-            ./rust-clippy
+            if [[ $CLIPPY_DATE == $TODAY_DATE]] && [[ $rust_version == "nightly" ]]
+            then
+                build_clippy_image
+            fi
+            else
+                build_clippy_image
+            fi
 
             # build docker with rustfmt installed along with rust
-            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
-            -t iamsauravsharma/rust-fmt:$RUST_VERSION \
-            ./rust-fmt
+            if [[ $RUSTFMT_DATE == $TODAY_DATE]] && [[ $rust_version == "nightly" ]]
+            then
+                build_fmt_image
+            fi
+            else
+                build_fmt_image
+            fi
 
             # build docker with both clippy and rustfmt installed along with rust
-            docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
-            -t iamsauravsharma/rust-fmt-clippy:$RUST_VERSION \
-            ./rust-fmt-clippy
+            if [[ $RUSTFMT_DATE == $TODAY_DATE]] && [[ $CLIPPY_DATE == $TODAY_DATE]] && [[ $rust_version == "nightly" ]]
+            then
+                build_fmt_clippy_image
+            fi
+            else
+                build_fmt_clippy_image
+            fi
         done
 
         # check if docker script is runnning in travis then check branch and run otherwise locally run without checking branch
@@ -77,3 +93,21 @@ do
 
     done
 done
+
+build_clippy_image() {
+    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
+    -t iamsauravsharma/rust-clippy:$RUST_VERSION \
+    ./rust-clippy
+}
+
+build_fmt_image() {
+    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
+    -t iamsauravsharma/rust-fmt:$RUST_VERSION \
+    ./rust-fmt
+}
+
+build_fmt_clippy_image() {
+    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
+    -t iamsauravsharma/rust-fmt-clippy:$RUST_VERSION \
+    ./rust-fmt-clippy
+}
