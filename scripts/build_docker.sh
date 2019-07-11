@@ -51,7 +51,7 @@ do
             ./rust
 
             # build docker with clippy installed along with rust
-            if [[ $CLIPPY_DATE == $TODAY_DATE]] && [[ $rust_version == "nightly" ]]
+            if [[ $CLIPPY_DATE == $TODAY_DATE ]] && [[ $rust_version == "nightly" ]]
             then
                 build_clippy_image
             fi
@@ -60,7 +60,7 @@ do
             fi
 
             # build docker with rustfmt installed along with rust
-            if [[ $RUSTFMT_DATE == $TODAY_DATE]] && [[ $rust_version == "nightly" ]]
+            if [[ $RUSTFMT_DATE == $TODAY_DATE ]] && [[ $rust_version == "nightly" ]]
             then
                 build_fmt_image
             fi
@@ -69,7 +69,7 @@ do
             fi
 
             # build docker with both clippy and rustfmt installed along with rust
-            if [[ $RUSTFMT_DATE == $TODAY_DATE]] && [[ $CLIPPY_DATE == $TODAY_DATE]] && [[ $rust_version == "nightly" ]]
+            if [[ $RUSTFMT_DATE == $TODAY_DATE ]] && [[ $CLIPPY_DATE == $TODAY_DATE ]] && [[ $rust_version == "nightly" ]]
             then
                 build_fmt_clippy_image
             fi
