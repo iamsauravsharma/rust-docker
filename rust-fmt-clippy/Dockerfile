@@ -10,4 +10,10 @@ LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 RUN rustup component add clippy \
     && rustup component add rustfmt
 
-ENTRYPOINT ["uname -a","rustup --version","rustc --version","cargo --version","cargo clippy --version","rustfmt --version","/bin/bash"]
+ENTRYPOINT uname -a \
+    && rustup --version \
+    && rustc --version \
+    && cargo --version \
+    && cargo clippy --version \
+    && rustfmt --version \
+    && /bin/bash

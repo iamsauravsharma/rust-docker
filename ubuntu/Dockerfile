@@ -13,4 +13,5 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* /var/tmp/* 
 
-ENTRYPOINT ["uname -a","/bin/bash"]
+CMD uname -a \
+    && /bin/bash

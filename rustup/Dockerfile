@@ -10,4 +10,6 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none
 
 ENV PATH /root/.cargo/bin:$PATH
 
-ENTRYPOINT ["uname -a","rustup --version","/bin/bash"]
+ENTRYPOINT uname -a \
+    && rustup --version \
+    && /bin/bash
