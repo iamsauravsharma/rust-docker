@@ -15,3 +15,5 @@ deploy:
   - provider: script
     script: bash scripts/build_docker.sh
     skip-cleanup: true
+    on:
+      all_branches: true

@@ -7,10 +7,11 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/scripts/rust-clippy-scripts
+RUN rustup component add clippy
 
-RUN chmod 777 -R /root/scripts
-
-RUN /root/scripts/rust-clippy-scripts/download.sh
-
-ENTRYPOINT /root/scripts/rust-clippy-scripts/show_version.sh
+ENTRYPOINT uname -a \
+    && rustup --version \
+    && rustc --version \
+    && cargo --version \
+    && cargo clippy --version \
+    && /bin/bash

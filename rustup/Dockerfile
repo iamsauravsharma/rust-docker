@@ -6,12 +6,10 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/scripts/rustup-scripts
-
-RUN chmod 777 -R /root/scripts
-
-RUN /root/scripts/rustup-scripts/download.sh
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none
 
 ENV PATH /root/.cargo/bin:$PATH
 
-ENTRYPOINT /root/scripts/rustup-scripts/show_version.sh
+ENTRYPOINT uname -a \
+    && rustup --version \
+    && /bin/bash

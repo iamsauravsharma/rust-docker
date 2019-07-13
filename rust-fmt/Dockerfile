@@ -7,10 +7,11 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/scripts/rust-fmt-scripts
+RUN rustup component add rustfmt
 
-RUN chmod 777 -R /root/scripts
-
-RUN /root/scripts/rust-fmt-scripts/download.sh
-
-ENTRYPOINT /root/scripts/rust-fmt-scripts/show_version.sh
+ENTRYPOINT uname -a \
+    && rustup --version \
+    && rustc --version \
+    && cargo --version \
+    && rustfmt --version \
+    && /bin/bash
