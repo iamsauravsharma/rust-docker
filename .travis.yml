@@ -8,12 +8,8 @@ dist: xenial
 services:
   - docker
 
-before_deploy:
+before_script:
   - chmod -R 777 scripts
 
-deploy:
-  - provider: script
-    script: bash scripts/build_docker.sh
-    skip-cleanup: true
-    on:
-      all_branches: true
+script:
+  - bash scripts/build_docker.sh
