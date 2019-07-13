@@ -64,7 +64,8 @@ do
             if [[ $CLIPPY_DATE == $TODAY_DATE ]] && [[ $rust_version == "nightly" ]]
             then
                 build_clippy_image
-            else
+            elif [[ $rust_version != "nightly" ]]
+            then
                 build_clippy_image
             fi
 
@@ -72,7 +73,8 @@ do
             if [[ $RUSTFMT_DATE == $TODAY_DATE ]] && [[ $rust_version == "nightly" ]]
             then
                 build_fmt_image
-            else
+            elif [[ $rust_version != "nightly" ]]
+            then
                 build_fmt_image
             fi
 
@@ -80,7 +82,8 @@ do
             if [[ $RUSTFMT_DATE == $TODAY_DATE ]] && [[ $CLIPPY_DATE == $TODAY_DATE ]] && [[ $rust_version == "nightly" ]]
             then
                 build_fmt_clippy_image
-            else
+            elif [[ $rust_version != "nightly" ]]
+            then
                 build_fmt_clippy_image
             fi
         done
