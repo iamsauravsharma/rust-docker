@@ -7,10 +7,7 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/scripts/rust-fmt-clippy-scripts
+RUN rustup component add clippy \
+    && rustup component add rustfmt
 
-RUN chmod 777 -R /root/scripts
-
-RUN /root/scripts/rust-fmt-clippy-scripts/download.sh
-
-ENTRYPOINT /root/scripts/rust-fmt-clippy-scripts/show_version.sh
+ENTRYPOINT ["uname -a","rustup --version","rustc --version","cargo --version","cargo clippy --version","rustfmt --version","/bin/bash"]

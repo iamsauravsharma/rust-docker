@@ -6,10 +6,7 @@ FROM ${IMAGE}
 
 ARG RUST_VERSION=stable
 
-ADD ./scripts /root/scripts/rust-scripts
+RUN rustup install ${RUST_VERSION} \
+    && rustup default ${RUST_VERSION}
 
-RUN chmod 777 -R /root/scripts
-
-RUN /root/scripts/rust-scripts/download.sh ${RUST_VERSION}
-
-ENTRYPOINT /root/scripts/rust-scripts/show_version.sh
+ENTRYPOINT ["uname -a","rustup --version","rustc --version","cargo --version","/bin/bash"]

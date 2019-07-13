@@ -5,10 +5,12 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-ADD ./scripts /root/scripts/ubuntu-scripts
+RUN apt update \
+    && apt dist-upgrade -y \
+    && apt install -y curl sudo git ca-certificates --no-install-recommends \
+    && apt autoremove -y \
+    && apt clean -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* /var/tmp/* 
 
-RUN chmod 777 -R /root/scripts
-
-RUN /root/scripts/ubuntu-scripts/add_package.sh
-
-ENTRYPOINT /root/scripts/ubuntu-scripts/show_version.sh
+ENTRYPOINT ["uname -a","/bin/bash"]
