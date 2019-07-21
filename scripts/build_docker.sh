@@ -101,7 +101,7 @@ do
         # tag a images of rust as stable, beta, nightly for easy fetching of required version
         if [[ $os_name == "ubuntu" ]] && [[ $os_version == "latest" ]]
         then
-            for rust_version in $RUST_VERSION
+            for rust_version in $RUST
             do
                 docker tag iamsauravsharma/rust:$rust_version-$os_name$os_version iamsauravsharma/rust:$rust_version
                 docker tag iamsauravsharma/rust-clippy:$rust_version-$os_name$os_version iamsauravsharma/rust-clippy:$rust_version
