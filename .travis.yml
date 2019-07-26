@@ -3,7 +3,7 @@ language: minimal
 git:
   depth: false
 
-dist: xenial
+dist: bionic
 
 services:
   - docker
