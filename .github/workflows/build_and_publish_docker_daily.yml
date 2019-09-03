@@ -1,0 +1,19 @@
+name: Build & publish docker daily
+on:
+  schedule:
+  - cron: '0 4 * * *'
+
+jobs:
+  build_and_publish_docker_at_docker_hub:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: change file mode
+      run: chmod -R 777 scripts
+    - name: build & publish docker
+      run: bash scripts/build_docker.sh
+      env:
+        github_actions: true
+        docker_usernmae: ${{ secrets.DOCKER_USERNAME }}
+        docker_password: ${{ secrets.DOCKER_PASSWORD }}
