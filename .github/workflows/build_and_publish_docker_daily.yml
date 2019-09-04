@@ -15,5 +15,5 @@ jobs:
       run: bash scripts/build_docker.sh
       env:
         github_actions: true
-        docker_usernmae: ${{ secrets.DOCKER_USERNAME }}
+        docker_username: ${{ secrets.DOCKER_USERNAME }}
         docker_password: ${{ secrets.DOCKER_PASSWORD }}
