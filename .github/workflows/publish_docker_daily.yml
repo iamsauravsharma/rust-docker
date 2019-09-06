@@ -1,10 +1,10 @@
-name: Build & publish docker daily
+name: Publish docker daily
 on:
   schedule:
   - cron: '0 4 * * *'
 
 jobs:
-  build_and_publish_docker_at_docker_hub:
+  publish_at_docker_hub:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,6 +14,6 @@ jobs:
     - name: build & publish docker
       run: bash scripts/build_docker.sh
       env:
-        actions: true
+        ci_name: github actions
         docker_username: ${{ secrets.DOCKER_USERNAME }}
         docker_password: ${{ secrets.DOCKER_PASSWORD }}
