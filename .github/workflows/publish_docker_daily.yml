@@ -14,6 +14,5 @@ jobs:
     - name: build & publish docker
       run: bash scripts/build_docker.sh
       env:
-        ci_name: github actions
-        docker_username: ${{ secrets.DOCKER_USERNAME }}
-        docker_password: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
