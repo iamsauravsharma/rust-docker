@@ -1,6 +1,6 @@
 # RUST-DOCKER
 
-Docker image with different version of rust along with clippy and rustfmt preinstalled.
+Docker image with different version of rust along with clippy and rustfmt preinstalled. Only latest image where all components are available is build and published out daily.
 
 **Status:**
 
@@ -33,19 +33,20 @@ Docker image with different version of rust along with clippy and rustfmt preins
 |:-------:|
 | latest  |
 | rolling |
-| devel   |
 
 
 ### Tags formats
 
 | Images | Tags Format| Example |
 |:------:|:----------:|:-------:|
-| ```${os_type}``` | ```{os_version}``` | ```iamsauravsharma/ubuntu:devel```         |
-| rustup | ```${os_type}-${version}```  | ```iamsauravsharam/rustup:ubuntu-rolling``` |
-| rust   | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust:stable-ubuntulatest``` |
-| rust-clippy       | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust-clippy:stable-ubuntulatest```    |
-| rust-fmt          | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust-fmt:nightly-ubunturolling```     |
-| rust -fmt-clippy  | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust-fmt-clippy:beta-ubunturolling``` |
+| ```${os_type}``` | ```{os_version}```                            | ```iamsauravsharma/ubuntu:latest```                      |
+| rustup           | ```${os_type}-${version}```                   | ```iamsauravsharam/rustup:ubuntu-rolling```              |
+| rust             | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust:stable-ubuntulatest```           |
+| rust-clippy      | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust-clippy:stable-ubuntulatest```    |
+| rust-fmt         | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust-fmt:nightly-ubunturolling```     |
+| rust-fmt-clippy  | ```${rust_version}-${os_name}${os_version}``` | ```iamsauravsharma/rust-fmt-clippy:beta-ubunturolling``` |
+
+Similarly all of images support latest and as well as rust, rust-clippy, rust-fmt, rust-fmt-clippy supports out stable beta nightly value as well
 
 [build_badge]: https://img.shields.io/travis/com/iamsauravsharma/rust-docker.svg?logo=travis
 [build_link]: https://travis-ci.com/iamsauravsharma/rust-docker
