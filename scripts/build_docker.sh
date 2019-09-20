@@ -66,13 +66,13 @@ do
             # build only rust toolchain version installed docker
             build_image rust
 
-            # build docker with clippy installed along with rust
+            # build docker with clippy pre-installed
             build_clippy_image
 
-            # build docker with rustfmt installed along with rust
+            # build docker with rustfmt pre-installed
             build_fmt_image
 
-            # build docker with both clippy and rustfmt installed along with rust
+            # build docker with both clippy and rustfmt pre-installed
             build_fmt_clippy_image
         done
 

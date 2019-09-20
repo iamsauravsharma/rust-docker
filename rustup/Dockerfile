@@ -6,6 +6,7 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
+# Download rustup with no default toolchain installed
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain none
 
 ENV PATH /root/.cargo/bin:$PATH

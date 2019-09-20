@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#login to docker hub registry in travis
+#login to docker hub registry in travis or github actions
 if [[ $TRAVIS == "true" ]] || [[ $GITHUB_ACTIONS  == "true" ]]
 then
     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
