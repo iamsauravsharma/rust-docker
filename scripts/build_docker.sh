@@ -3,6 +3,7 @@
 # Different type of OS supported
 OS="UBUNTU"
 
+# shellcheck disable=SC2034
 # Version of different OS support
 UBUNTU="latest rolling"
 
@@ -14,27 +15,27 @@ RUSTFMT_DATE=$(curl https://rust-lang.github.io/rustup-components-history/x86_64
 TODAY_DATE=$(date +%Y-%m-%d)
 
 build_image() {
-    docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version --build-arg RUST_VERSION=$rust_version \
-    -t iamsauravsharma/$1:$RUST_VERSION \
-    ./$1
+    docker build --build-arg OS="$os_name" --build-arg OS_VERSION="$os_version" --build-arg RUST_VERSION="$rust_version" \
+    -t iamsauravsharma/"$1":"$RUST_VERSION" \
+    ./"$1"
 }
 
 build_clippy_image() {
-    if [[ $CLIPPY_DATE == $TODAY_DATE ]] || [[ $rust_version != "nightly" ]]
+    if [[ $CLIPPY_DATE == "$TODAY_DATE" ]] || [[ $rust_version != "nightly" ]]
     then
         build_image rust-clippy
     fi
 }
 
 build_fmt_image() {
-    if [[ $RUSTFMT_DATE == $TODAY_DATE ]] || [[ $rust_version != "nightly" ]]
+    if [[ $RUSTFMT_DATE == "$TODAY_DATE" ]] || [[ $rust_version != "nightly" ]]
     then
         build_image rust-fmt
     fi
 }
 
 build_fmt_clippy_image() {
-    if [[ $RUSTFMT_DATE == $TODAY_DATE && $CLIPPY_DATE == $TODAY_DATE ]] || [[ $rust_version != "nightly" ]]
+    if [[ $RUSTFMT_DATE == "$TODAY_DATE" && $CLIPPY_DATE == "$TODAY_DATE" ]] || [[ $rust_version != "nightly" ]]
     then
         build_image rust-fmt-clippy
     fi
@@ -91,18 +92,18 @@ do
         then
             for rust_version in $RUST
             do
-                docker tag iamsauravsharma/rust:$rust_version-$os_name$os_version iamsauravsharma/rust:$rust_version
-                if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == $TODAY_DATE ]]
+                docker tag iamsauravsharma/rust:"$rust_version"-$os_name$os_version iamsauravsharma/rust:"$rust_version"
+                if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == "$TODAY_DATE" ]]
                 then
-                    docker tag iamsauravsharma/rust-clippy:$rust_version-$os_name$os_version iamsauravsharma/rust-clippy:$rust_version
+                    docker tag iamsauravsharma/rust-clippy:"$rust_version"-$os_name$os_version iamsauravsharma/rust-clippy:"$rust_version"
                 fi
-                if [[ $rust_version != "nightly" ]] || [[ $RUSTFMT_DATE == $TODAY_DATE ]]
+                if [[ $rust_version != "nightly" ]] || [[ $RUSTFMT_DATE == "$TODAY_DATE" ]]
                 then
-                    docker tag iamsauravsharma/rust-fmt:$rust_version-$os_name$os_version iamsauravsharma/rust-fmt:$rust_version
+                    docker tag iamsauravsharma/rust-fmt:"$rust_version"-$os_name$os_version iamsauravsharma/rust-fmt:"$rust_version"
                 fi
-                if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == $TODAY_DATE && $RUSTFMT_DATE == $TODAY_DATE ]]
+                if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == "$TODAY_DATE" && $RUSTFMT_DATE == "$TODAY_DATE" ]]
                 then
-                    docker tag iamsauravsharma/rust-fmt-clippy:$rust_version-$os_name$os_version iamsauravsharma/rust-fmt-clippy:$rust_version
+                    docker tag iamsauravsharma/rust-fmt-clippy:"$rust_version"-$os_name$os_version iamsauravsharma/rust-fmt-clippy:"$rust_version"
                 fi
             done 
         fi

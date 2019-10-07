@@ -12,5 +12,5 @@ REPOSITORY_WITH_TAG=$(docker images --filter=reference="iamsauravsharma/*:*" --f
 #push tag to dockerhub registry
 for repository in $REPOSITORY_WITH_TAG
 do
- docker push $repository
+ docker push "$repository"
 done
