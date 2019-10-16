@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 #login to docker hub registry in travis or github actions
 if [[ $TRAVIS == "true" ]] || [[ $GITHUB_ACTIONS  == "true" ]]

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 #clean and remove container
 docker rm "$(docker ps -aq)" || echo "no container are present to remove out"

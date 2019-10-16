@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -ex
 
 # Different type of OS supported
 OS="UBUNTU"
@@ -123,3 +124,5 @@ do
 
     done
 done
+
+set +x
