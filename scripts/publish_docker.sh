@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
-#login to docker hub registry in travis or github actions
+#login to docker hub registry in travis or github actions using personal access token
 if [[ $TRAVIS == "true" ]] || [[ $GITHUB_ACTIONS  == "true" ]]
 then
-    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
 fi
 
 # get repository name along with its tag which contain iamsauravsharma

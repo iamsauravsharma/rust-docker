@@ -29,10 +29,10 @@ Docker image with different version of rust along with clippy and rustfmt preins
 
 ##### OS
 
-| Ubuntu  |
-|:-------:|
-| latest  |
-| rolling |
+| Ubuntu  | Alpine |
+|:-------:|:------:|
+| latest  | latest |
+| rolling | edge   |
 
 
 ### Tags formats
