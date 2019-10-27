@@ -2,11 +2,14 @@
 set -ex
 
 # Different type of OS supported
-OS="UBUNTU"
+OS="ALPINE UBUNTU"
 
 # shellcheck disable=SC2034
 # Version of different OS support
 UBUNTU="latest rolling"
+
+# shellcheck disable=SC2034
+ALPINE="latest edge"
 
 # RUST version
 RUST="stable beta nightly"
@@ -42,6 +45,30 @@ build_fmt_clippy_image() {
     fi
 }
 
+tag_stable() {
+    docker tag iamsauravsharma/rustup:"$os_name-$os_version" iamsauravsharma/rustup:"$1"
+    docker tag iamsauravsharma/rust:stable-"$os_name$os_version" iamsauravsharma/rust:"$1"
+    docker tag iamsauravsharma/rust-clippy:stable-"$os_name$os_version" iamsauravsharma/rust-clippy:"$1"
+    docker tag iamsauravsharma/rust-fmt:stable-"$os_name$os_version" iamsauravsharma/rust-fmt:"$1"
+    docker tag iamsauravsharma/rust-fmt-clippy:stable-"$os_name$os_version" iamsauravsharma/rust-fmt-clippy:"$1"
+}
+
+tag_version() {
+    docker tag iamsauravsharma/rust:"$rust_version-$os_name$os_version" iamsauravsharma/rust:"$1"
+    if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == "$TODAY_DATE" ]]
+    then
+        docker tag iamsauravsharma/rust-clippy:"$rust_version-$os_name$os_version" iamsauravsharma/rust-clippy:"$1"
+    fi
+    if [[ $rust_version != "nightly" ]] || [[ $RUSTFMT_DATE == "$TODAY_DATE" ]]
+    then
+        docker tag iamsauravsharma/rust-fmt:"$rust_version-$os_name$os_version" iamsauravsharma/rust-fmt:"$1"
+    fi
+    if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == "$TODAY_DATE" && $RUSTFMT_DATE == "$TODAY_DATE" ]]
+    then
+        docker tag iamsauravsharma/rust-fmt-clippy:"$rust_version-$os_name$os_version" iamsauravsharma/rust-fmt-clippy:"$1"
+    fi
+}
+
 for os in $OS
 do
     version=${!os}
@@ -51,13 +78,13 @@ do
         os_name="${os,,}"
 
         # build different os version images for os
-        docker build --build-arg VERSION=$os_version \
-        -t iamsauravsharma/$os_name:$os_version \
-        ./$os_name
+        docker build --build-arg VERSION="$os_version" \
+        -t iamsauravsharma/"$os_name:$os_version" \
+        ./"$os_name"
 
         # build rustup for that os version
-        docker build --build-arg OS=$os_name --build-arg OS_VERSION=$os_version \
-        -t iamsauravsharma/rustup:$os_name-$os_version \
+        docker build --build-arg OS="$os_name" --build-arg OS_VERSION="$os_version" \
+        -t iamsauravsharma/rustup:"$os_name-$os_version" \
         ./rustup
 
         # build different version of rust with components for certain os version
@@ -79,34 +106,33 @@ do
         done
 
         # tag a images a latest for easy fetching
-        if [[ $os_name == "ubuntu" ]] && [[ $os_version == "latest" ]]
+        if [[ $os_name == "alpine" ]] && [[ $os_version == "latest" ]]
         then
-            docker tag iamsauravsharma/rustup:$os_name-$os_version iamsauravsharma/rustup:latest
-            docker tag iamsauravsharma/rust:stable-$os_name$os_version iamsauravsharma/rust:latest
-            docker tag iamsauravsharma/rust-clippy:stable-$os_name$os_version iamsauravsharma/rust-clippy:latest
-            docker tag iamsauravsharma/rust-fmt:stable-$os_name$os_version iamsauravsharma/rust-fmt:latest
-            docker tag iamsauravsharma/rust-fmt-clippy:stable-$os_name$os_version iamsauravsharma/rust-fmt-clippy:latest
+            tag_stable "$os_version"
+        fi
+
+        # tag a images by os name for latest
+        if [[ $os_version == "latest" ]]
+        then
+            tag_stable "$os_name"
         fi
 
         # tag a images of rust as stable, beta, nightly for easy fetching of required version
-        if [[ $os_name == "ubuntu" ]] && [[ $os_version == "latest" ]]
+        if [[ $os_name == "alpine" ]] && [[ $os_version == "latest" ]]
         then
             for rust_version in $RUST
             do
-                docker tag iamsauravsharma/rust:"$rust_version"-$os_name$os_version iamsauravsharma/rust:"$rust_version"
-                if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == "$TODAY_DATE" ]]
-                then
-                    docker tag iamsauravsharma/rust-clippy:"$rust_version"-$os_name$os_version iamsauravsharma/rust-clippy:"$rust_version"
-                fi
-                if [[ $rust_version != "nightly" ]] || [[ $RUSTFMT_DATE == "$TODAY_DATE" ]]
-                then
-                    docker tag iamsauravsharma/rust-fmt:"$rust_version"-$os_name$os_version iamsauravsharma/rust-fmt:"$rust_version"
-                fi
-                if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == "$TODAY_DATE" && $RUSTFMT_DATE == "$TODAY_DATE" ]]
-                then
-                    docker tag iamsauravsharma/rust-fmt-clippy:"$rust_version"-$os_name$os_version iamsauravsharma/rust-fmt-clippy:"$rust_version"
-                fi
+                tag_version "$rust_version"
             done 
+        fi
+
+        # tag a image as $rust_version-$os_name for easy fetching of require os latest version
+        if [[ $os_version == "latest" ]]
+        then
+            for rust_version in $RUST
+            do
+                tag_version "$rust_version-$os_name"
+            done
         fi
 
         # check if docker script is runnning in travis then check branch and run otherwise locally run without checking branch
