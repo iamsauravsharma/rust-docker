@@ -13,4 +13,4 @@ ENV PATH /root/.cargo/bin:$PATH
 
 ENTRYPOINT uname -a \
     && rustup --version \
-    && /bin/bash
+    && /bin/sh

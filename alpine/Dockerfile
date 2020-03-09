@@ -15,4 +15,4 @@ RUN apk add --update \
     && rm -rf /var/cache/apk/*
 
 CMD uname -a \
-    && /bin/bash
+    && /bin/sh

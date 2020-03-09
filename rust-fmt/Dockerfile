@@ -14,4 +14,4 @@ ENTRYPOINT uname -a \
     && rustc --version \
     && cargo --version \
     && rustfmt --version \
-    && /bin/bash
+    && /bin/sh

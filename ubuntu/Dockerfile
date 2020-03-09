@@ -15,4 +15,4 @@ RUN apt update \
     && rm -rf /tmp/* /var/tmp/* 
 
 CMD uname -a \
-    && /bin/bash
+    && /bin/sh

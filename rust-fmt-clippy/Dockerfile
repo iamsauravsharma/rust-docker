@@ -16,4 +16,4 @@ ENTRYPOINT uname -a \
     && cargo --version \
     && cargo clippy --version \
     && rustfmt --version \
-    && /bin/bash
+    && /bin/sh

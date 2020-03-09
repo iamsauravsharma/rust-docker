@@ -14,4 +14,4 @@ ENTRYPOINT uname -a \
     && rustc --version \
     && cargo --version \
     && cargo clippy --version \
-    && /bin/bash
+    && /bin/sh
