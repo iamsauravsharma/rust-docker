@@ -1,6 +1,5 @@
 ARG OS=ubuntu
 ARG OS_VERSION=latest
-ARG RUST_VERSION=stable
 ARG IMAGE=iamsauravsharma/rustup:${OS}-${OS_VERSION}
 
 FROM ${IMAGE}
