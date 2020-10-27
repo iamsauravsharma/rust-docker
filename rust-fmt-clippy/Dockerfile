@@ -1,15 +1,15 @@
 ARG OS=ubuntu
 ARG OS_VERSION=latest
-ARG RUST_VERSION=stable
-ARG IMAGE=iamsauravsharma/rust:${RUST_VERSION}-${OS}${OS_VERSION}
+ARG IMAGE=iamsauravsharma/rustup:${OS}-${OS_VERSION}
 
 FROM ${IMAGE}
 
-ARG RUST_VERSION
+ARG RUST_VERSION=stable
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-RUN rustup toolchain install ${RUST_VERSION} --allow-downgrade --component clippy rustfmt
+RUN rustup toolchain install ${RUST_VERSION} --component clippy rustfmt rust-docs \
+    && rustup default ${RUST_VERSION}
 
 ENTRYPOINT uname -a \
     && rustup --version \
