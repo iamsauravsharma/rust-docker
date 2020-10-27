@@ -5,6 +5,8 @@ ARG IMAGE=iamsauravsharma/rust:${RUST_VERSION}-${OS}${OS_VERSION}
 
 FROM ${IMAGE}
 
+ARG RUST_VERSION
+
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
 RUN rustup toolchain install ${RUST_VERSION} --allow-downgrade --component rustfmt
