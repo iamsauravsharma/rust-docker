@@ -6,7 +6,7 @@ FROM ${IMAGE}
 
 ARG RUST_VERSION=stable
 
-RUN rustup install ${RUST_VERSION} \
+RUN rustup toolchain install ${RUST_VERSION} --component rust-docs \
     && rustup default ${RUST_VERSION}
 
 ENTRYPOINT uname -a \

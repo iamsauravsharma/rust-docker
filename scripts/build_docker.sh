@@ -14,10 +14,6 @@ ALPINE="latest edge"
 # RUST version
 RUST="stable beta nightly"
 
-CLIPPY_DATE=$(curl https://rust-lang.github.io/rustup-components-history/x86_64-unknown-linux-gnu/clippy)
-RUSTFMT_DATE=$(curl https://rust-lang.github.io/rustup-components-history/x86_64-unknown-linux-gnu/rustfmt)
-TODAY_DATE=$(date +%Y-%m-%d)
-
 build_image() {
     docker build --build-arg OS="$os_name" --build-arg OS_VERSION="$os_version" --build-arg RUST_VERSION="$rust_version" \
     -t iamsauravsharma/"$1":"$RUST_VERSION" \
@@ -25,24 +21,15 @@ build_image() {
 }
 
 build_clippy_image() {
-    if [[ $CLIPPY_DATE == "$TODAY_DATE" ]] || [[ $rust_version != "nightly" ]]
-    then
-        build_image rust-clippy
-    fi
+    build_image rust-clippy
 }
 
 build_fmt_image() {
-    if [[ $RUSTFMT_DATE == "$TODAY_DATE" ]] || [[ $rust_version != "nightly" ]]
-    then
-        build_image rust-fmt
-    fi
+    build_image rust-fmt
 }
 
 build_fmt_clippy_image() {
-    if [[ $RUSTFMT_DATE == "$TODAY_DATE" && $CLIPPY_DATE == "$TODAY_DATE" ]] || [[ $rust_version != "nightly" ]]
-    then
-        build_image rust-fmt-clippy
-    fi
+    build_image rust-fmt-clippy
 }
 
 tag_stable() {
@@ -55,18 +42,9 @@ tag_stable() {
 
 tag_version() {
     docker tag iamsauravsharma/rust:"$rust_version-$os_name$os_version" iamsauravsharma/rust:"$1"
-    if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == "$TODAY_DATE" ]]
-    then
-        docker tag iamsauravsharma/rust-clippy:"$rust_version-$os_name$os_version" iamsauravsharma/rust-clippy:"$1"
-    fi
-    if [[ $rust_version != "nightly" ]] || [[ $RUSTFMT_DATE == "$TODAY_DATE" ]]
-    then
-        docker tag iamsauravsharma/rust-fmt:"$rust_version-$os_name$os_version" iamsauravsharma/rust-fmt:"$1"
-    fi
-    if [[ $rust_version != "nightly" ]] || [[ $CLIPPY_DATE == "$TODAY_DATE" && $RUSTFMT_DATE == "$TODAY_DATE" ]]
-    then
-        docker tag iamsauravsharma/rust-fmt-clippy:"$rust_version-$os_name$os_version" iamsauravsharma/rust-fmt-clippy:"$1"
-    fi
+    docker tag iamsauravsharma/rust-clippy:"$rust_version-$os_name$os_version" iamsauravsharma/rust-clippy:"$1"
+    docker tag iamsauravsharma/rust-fmt:"$rust_version-$os_name$os_version" iamsauravsharma/rust-fmt:"$1"
+    docker tag iamsauravsharma/rust-fmt-clippy:"$rust_version-$os_name$os_version" iamsauravsharma/rust-fmt-clippy:"$1"
 }
 
 for os in $OS
@@ -147,7 +125,6 @@ do
             bash scripts/publish_docker.sh
             bash scripts/clean_docker.sh
         fi
-
     done
 done
 

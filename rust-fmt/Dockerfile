@@ -7,7 +7,7 @@ FROM ${IMAGE}
 
 LABEL maintainer="Saurav Sharma <appdroiddeveloper@gmail.com>"
 
-RUN rustup component add rustfmt
+RUN rustup toolchain install ${RUST_VERSION} --allow-downgrade --component rustfmt
 
 ENTRYPOINT uname -a \
     && rustup --version \
